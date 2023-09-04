@@ -5,8 +5,12 @@ RUN apt update && apt install nginx wget curl vim -y
 #USER test1
 #WORKDIR /home/test1
 COPY useradd.sh .
-EXPOSE 8080
+EXPOSE 80
 #CMD ["bash", "useradd.sh"]
 #ADD tmp.tar /home
 #COPY tmp.tar .
-ENTRYPOINT ["bash", "useradd.sh"]
+#ENTRYPOINT ["bash", "useradd.sh"]
+#ENTRYPOINT ["nginx", "-g", "daemon off;"]
+HEALTHCHECK --interval=5s CMD ping -c 5 172.17.0.2
+ENTRYPOINT ["nginx", "-g", "daemon off;"]
+
