@@ -4,7 +4,9 @@ RUN apt update && apt install nginx wget curl vim -y
 #LABEL user=karthik
 #USER test1
 #WORKDIR /home/test1
-COPY useradd.sh .
+ENV app=prod
+ARG version=2
+ONBUILD COPY useradd.sh .
 EXPOSE 80
 #CMD ["bash", "useradd.sh"]
 #ADD tmp.tar /home
